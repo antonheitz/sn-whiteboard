@@ -1,8 +1,17 @@
-# editor-template-cra-typescript
+# Standard Notes Drawing Extension
 
-Template for building editors for Standard Notes using Create React App and TypeScript
+A extension for Standard Notes utilizing the Standard Notes extension template and the TLDraw React Package.
 
-## Development
+## Add to your Standard Notes Account
+
+Simply add the extension via the github pages.
+
+> gitbung.com 
+
+Also you can self-host the extension, a guide below.
+
+
+# Old
 
 **Prerequisites:** Install [Node.js](https://nodejs.org/en/), [Yarn](https://classic.yarnpkg.com/en/docs/install/), and [Git](https://github.com/git-guides/install-git) on your computer.
 
