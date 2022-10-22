@@ -1,6 +1,7 @@
 import React from 'react';
 import EditorKit, { EditorKitDelegate } from '@standardnotes/editor-kit';
 import { TDDocument, Tldraw, TldrawApp } from '@tldraw/tldraw';
+import Switch from 'react-switch';
 
 export enum HtmlElementId {
   snComponent = 'sn-component',
@@ -15,12 +16,15 @@ export enum HtmlClassName {
 export interface EditorInterface {
   printUrl: boolean;
   text: string;
+  darkMode: boolean;
 }
 
 const initialState = {
   printUrl: false,
   text: '',
+  darkMode: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 };
+
 
 let keyMap = new Map();
 
@@ -45,7 +49,7 @@ export default class Editor extends React.Component<{}, EditorInterface> {
           text,
         });
       },
-      clearUndoHistory: () => {},
+      clearUndoHistory: () => { },
       getElementsBySelector: () => [],
     };
 
@@ -53,12 +57,6 @@ export default class Editor extends React.Component<{}, EditorInterface> {
       mode: 'plaintext',
       supportsFileSafe: false,
     });
-  };
-
-  handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const target = event.target;
-    const value = target.value;
-    this.saveText(value);
   };
 
   saveText = (text: string) => {
@@ -80,10 +78,6 @@ export default class Editor extends React.Component<{}, EditorInterface> {
     }
   };
 
-  onBlur = (e: React.FocusEvent) => {};
-
-  onFocus = (e: React.FocusEvent) => {};
-
   onKeyDown = (e: React.KeyboardEvent | KeyboardEvent) => {
     keyMap.set(e.key, true);
     // Do nothing if 'Control' and 's' are pressed
@@ -100,35 +94,39 @@ export default class Editor extends React.Component<{}, EditorInterface> {
     this.saveText(JSON.stringify(app.document));
   };
 
+  handleDarkmodeChange = (checked: boolean, event: MouseEvent | React.SyntheticEvent<KeyboardEvent | MouseEvent, Event>, id: string) => {
+    this.setState({ darkMode: checked });
+  }
+
   render() {
     const { text } = this.state;
-    var current_document: TDDocument | undefined = undefined;
+    var parsed_text: TDDocument | undefined = undefined;
     try {
-      current_document = JSON.parse(text);
+      parsed_text = JSON.parse(text);
     } catch (e: any) {
-      current_document = {
-        id: 'doc',
-        name: 'Note',
-        version: TldrawApp.version,
-        pages: {
-          page: {
-            id: 'page',
-            shapes: {},
-            bindings: {},
-          },
-        },
-        pageStates: {
-          page: {
-            id: 'page',
-            selectedIds: [],
-            camera: {
-              point: [0, 0],
-              zoom: 1,
+      parsed_text = {
+          id: 'doc',
+          name: 'Note',
+          version: TldrawApp.version,
+          pages: {
+            page: {
+              id: 'page',
+              shapes: {},
+              bindings: {},
             },
           },
-        },
-        assets: {},
-      };
+          pageStates: {
+            page: {
+              id: 'page',
+              selectedIds: [],
+              camera: {
+                point: [0, 0],
+                zoom: 1,
+              }
+            },
+          },
+          assets: {},
+        };
     }
 
     return (
@@ -138,8 +136,14 @@ export default class Editor extends React.Component<{}, EditorInterface> {
         }
         id={HtmlElementId.snComponent}
         tabIndex={0}
+        style={{ paddingRight: 20 }}
       >
-        <Tldraw document={current_document} onPersist={this.onPictureChange} />
+        <div style={{ position: 'absolute', zIndex: 1000, top: 5, left: 5, display: 'flex' }}>
+          <Switch onChange={this.handleDarkmodeChange} checked={this.state.darkMode} uncheckedIcon={false} checkedIcon={false} onColor="#7af" />
+        </div>
+        <div style={{ top: 0, left: 0, right: 0, bottom: 0 }}>
+          <Tldraw document={parsed_text} showPages={false} darkMode={this.state.darkMode} showMenu={false} onPersist={this.onPictureChange} />
+        </div>
       </div>
     );
   }
