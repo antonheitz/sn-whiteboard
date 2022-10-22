@@ -130,5 +130,5 @@ yarn-debug.log*
 yarn-error.log*
 /public/ext.json
 
-.vscode/*
-.husky/*
+.vscode/
+.husky/
