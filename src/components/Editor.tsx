@@ -1,5 +1,6 @@
 import React from 'react';
 import EditorKit, { EditorKitDelegate } from '@standardnotes/editor-kit';
+import { TDDocument, Tldraw, TldrawApp } from '@tldraw/tldraw';
 
 export enum HtmlElementId {
   snComponent = 'sn-component',
@@ -95,8 +96,41 @@ export default class Editor extends React.Component<{}, EditorInterface> {
     keyMap.delete(e.key);
   };
 
+  onPictureChange = (app: TldrawApp) => {
+    this.saveText(JSON.stringify(app.document));
+  };
+
   render() {
     const { text } = this.state;
+    var current_document: TDDocument | undefined = undefined;
+    try {
+      current_document = JSON.parse(text);
+    } catch (e: any) {
+      current_document = {
+        id: 'doc',
+        name: 'Note',
+        version: TldrawApp.version,
+        pages: {
+          page: {
+            id: 'page',
+            shapes: {},
+            bindings: {},
+          },
+        },
+        pageStates: {
+          page: {
+            id: 'page',
+            selectedIds: [],
+            camera: {
+              point: [0, 0],
+              zoom: 1,
+            },
+          },
+        },
+        assets: {},
+      };
+    }
+
     return (
       <div
         className={
@@ -105,42 +139,7 @@ export default class Editor extends React.Component<{}, EditorInterface> {
         id={HtmlElementId.snComponent}
         tabIndex={0}
       >
-        <p>
-          Edit <code>src/components/Editor.tsx</code> and save to reload.
-        </p>
-        <p>
-          Visit the{' '}
-          <a
-            href="https://docs.standardnotes.org/extensions/intro"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Standard Notes documentation
-          </a>{' '}
-          to learn how to work with the Standard Notes API or{' '}
-          <a
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          .
-        </p>
-        <textarea
-          id={HtmlElementId.textarea}
-          name="text"
-          className={'sk-input contrast textarea'}
-          placeholder="Type here. Text in this textarea is automatically saved in Standard Notes"
-          rows={15}
-          spellCheck="true"
-          value={text}
-          onBlur={this.onBlur}
-          onChange={this.handleInputChange}
-          onFocus={this.onFocus}
-          onKeyDown={this.onKeyDown}
-          onKeyUp={this.onKeyUp}
-        />
+        <Tldraw document={current_document} onPersist={this.onPictureChange} />
       </div>
     );
   }
