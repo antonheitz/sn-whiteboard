@@ -1,6 +1,6 @@
 # Standard Notes Drawing Extension
 
-A extension for Standard Notes utilizing the Standard Notes extension template and the TLDraw React Package.
+A extension for Standard Notes utilizing the [Standard Notes extension template](https://github.com/standardnotes/editor-template-cra-typescript) and the [TLDraw React Package](https://github.com/Tldraw/Tldraw).
 
 ## Add to your Standard Notes Account
 
