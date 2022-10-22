@@ -1,0 +1,13 @@
+{
+  "identifier": "antonheitz.standardnotes-tldraw-editors",
+  "name": "Drawing",
+  "content_type": "SN|Component",
+  "area": "editor-editor",
+  "version": "0.1.0",
+  "description": "Here you can draw everything",
+  "url": "http://localhost:3000/index.html",
+  "download_url": "",
+  "latest_url": "",
+  "marketing_url": "https://github.com/standardnotes/editor-template-cra-typescript",
+  "thumbnail_url": ""
+}
