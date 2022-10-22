@@ -1,0 +1,12 @@
+@media print {
+  .print-url {
+    a[href]:after {
+      content: ' (' attr(href) ')';
+    }
+  }
+
+  .sn-component,
+  textarea {
+    outline: none;
+  }
+}
