@@ -1,13 +1,13 @@
 {
-  "identifier": "org.standardnotes.editor-template-cra-typescript",
-  "name": "Editor Template CRA Typescript",
+  "identifier": "antonheitz.sn-tldraw-editor",
+  "name": "Drawing",
   "content_type": "SN|Component",
   "area": "editor-editor",
   "version": "0.1.0",
-  "description": "Template for building editors for Standard Notes using Create React App and TypeScript",
+  "description": "An editor based on TLDraw to draw nice Pictures or take notes by hand.",
   "url": "http://localhost:3000/index.html",
   "download_url": "",
   "latest_url": "",
-  "marketing_url": "https://github.com/standardnotes/editor-template-cra-typescript",
+  "marketing_url": "https://github.com/antonheitz/sn-tldraw-editor",
   "thumbnail_url": ""
 }
