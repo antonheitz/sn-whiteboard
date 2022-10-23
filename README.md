@@ -23,6 +23,6 @@ cd sn-tldraw-editor
 3. Build the extension with `yarn build`.
 4. Serve the `build` folder that got created in 3. Please keep in mind that only the Desktop App will allow extensions not served via HTTPS.
 
-Hint: to serve the build folder you can use the recomended `sudo npm install -g http-server` and run `yarn server` in the root of the project. Then the extension link will be `http://localhost:3000/ext.json`.
+Hint: to serve the build folder you can use the recomended `sudo npm install -g http-server` and run `yarn server` in the root of the project. Then the extension link will be `http://localhost:3000/tldraw.json`.
 
 # Have fun drawing
