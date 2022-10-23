@@ -2,11 +2,13 @@
 
 A extension for Standard Notes utilizing the [Standard Notes extension template](https://github.com/standardnotes/editor-template-cra-typescript) and the [TLDraw React Package](https://github.com/Tldraw/Tldraw).
 
+It Works on Dektop, Mobile and Web.
+
 ## Add to your Standard Notes Account
 
 Simply add the extension via the github pages.
 
-> TBD
+> https://antonheitz.github.io/sn-tldraw-editor/tldraw.json
 
 Also you can self-host the extension, a guide below.
 
