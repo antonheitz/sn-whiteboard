@@ -23,7 +23,6 @@ const initialState = {
   text: '',
 };
 
-
 let keyMap = new Map();
 
 export default class Editor extends React.Component<{}, EditorInterface> {
@@ -47,7 +46,7 @@ export default class Editor extends React.Component<{}, EditorInterface> {
           text,
         });
       },
-      clearUndoHistory: () => { },
+      clearUndoHistory: () => {},
       getElementsBySelector: () => [],
     };
 
@@ -116,11 +115,11 @@ export default class Editor extends React.Component<{}, EditorInterface> {
             camera: {
               point: [0, 0],
               zoom: 1,
-            }
+            },
           },
         },
         assets: {},
-      }
+      };
     }
 
     return (
@@ -133,7 +132,12 @@ export default class Editor extends React.Component<{}, EditorInterface> {
         style={{ paddingRight: 20 }}
       >
         <div style={{ top: 0, left: 0, right: 0, bottom: 0 }}>
-          <Tldraw document={parsed_text} showPages={false} showMenu={false} onPersist={this.onPictureChange} />
+          <Tldraw
+            document={parsed_text}
+            showPages={false}
+            showMenu={false}
+            onPersist={this.onPictureChange}
+          />
         </div>
       </div>
     );
