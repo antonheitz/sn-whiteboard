@@ -22,7 +22,7 @@ export interface EditorInterface {
 const initialState = {
   printUrl: false,
   text: '',
-  darkMode: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  darkMode: false
 };
 
 
@@ -91,20 +91,27 @@ export default class Editor extends React.Component<{}, EditorInterface> {
   };
 
   onPictureChange = (app: TldrawApp) => {
-    this.saveText(JSON.stringify(app.document));
+    this.saveText(JSON.stringify({ document: app.document, darkMode: this.state.darkMode }));
   };
 
   handleDarkmodeChange = (checked: boolean, event: MouseEvent | React.SyntheticEvent<KeyboardEvent | MouseEvent, Event>, id: string) => {
     this.setState({ darkMode: checked });
+    const { text } = this.state;
+    var parsed_text: { document: TDDocument | undefined, darkMode: boolean } = JSON.parse(text);
+    this.saveText(JSON.stringify({ document: parsed_text.document, darkMode: checked }));
   }
 
   render() {
-    const { text } = this.state;
-    var parsed_text: TDDocument | undefined = undefined;
+    const { text, darkMode } = this.state;
+    var parsed_text: { document: TDDocument | undefined, darkMode: boolean } = {
+      document: undefined,
+      darkMode: darkMode
+    };
     try {
       parsed_text = JSON.parse(text);
     } catch (e: any) {
       parsed_text = {
+        document: {
           id: 'doc',
           name: 'Note',
           version: TldrawApp.version,
@@ -126,7 +133,9 @@ export default class Editor extends React.Component<{}, EditorInterface> {
             },
           },
           assets: {},
-        };
+        },
+        darkMode: darkMode
+      };
     }
 
     return (
@@ -142,7 +151,7 @@ export default class Editor extends React.Component<{}, EditorInterface> {
           <Switch onChange={this.handleDarkmodeChange} checked={this.state.darkMode} uncheckedIcon={false} checkedIcon={false} onColor="#7af" />
         </div>
         <div style={{ top: 0, left: 0, right: 0, bottom: 0 }}>
-          <Tldraw document={parsed_text} showPages={false} darkMode={this.state.darkMode} showMenu={false} onPersist={this.onPictureChange} />
+          <Tldraw document={parsed_text.document} showPages={false} darkMode={this.state.darkMode} showMenu={false} onPersist={this.onPictureChange} />
         </div>
       </div>
     );
