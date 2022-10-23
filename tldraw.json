@@ -5,9 +5,9 @@
   "area": "editor-editor",
   "version": "0.1.2",
   "description": "An editor based on TLDraw to draw nice Pictures or take notes by hand.",
-  "url": "http://localhost:3000/index.html",
+  "url": "https://antonheitz.github.io/sn-tldraw-editor/",
   "download_url": "https://github.com/antonheitz/sn-tldraw-editor",
-  "latest_url": "",
+  "latest_url": "https://antonheitz.github.io/sn-tldraw-editor/tldraw.json",
   "marketing_url": "https://github.com/antonheitz/sn-tldraw-editor",
   "thumbnail_url": ""
 }
