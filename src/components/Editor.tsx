@@ -48,6 +48,14 @@ export default class Editor extends React.Component<{}, EditorInterface> {
       },
       clearUndoHistory: () => {},
       getElementsBySelector: () => [],
+      generateCustomPreview: text => {
+        
+          return {
+            html: `<div> </div>`,
+            plain: ` `,
+          };
+        
+      },
     };
 
     this.editorKit = new EditorKit(delegate, {
@@ -136,6 +144,7 @@ export default class Editor extends React.Component<{}, EditorInterface> {
             document={parsed_text}
             showPages={false}
             showMenu={false}
+            darkMode={false}
             onPersist={this.onPictureChange}
           />
         </div>
