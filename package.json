@@ -90,6 +90,8 @@
   },
   "dependencies": {
     "@tldraw/tldraw": "^1.25.0",
-    "react-switch": "^7.0.0"
+    "@types/tinycolor": "^1.1.27",
+    "react-switch": "^7.0.0",
+    "tinycolor2": "^1.4.2"
   }
 }

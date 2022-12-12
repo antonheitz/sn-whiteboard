@@ -2,6 +2,7 @@ import React from 'react';
 import EditorKit, { EditorKitDelegate } from '@standardnotes/editor-kit';
 import { TDDocument, Tldraw, TldrawApp } from '@tldraw/tldraw';
 import Switch from 'react-switch';
+import tinycolor from 'tinycolor2';
 
 export enum HtmlElementId {
   snComponent = 'sn-component',
@@ -15,11 +16,13 @@ export enum HtmlClassName {
 
 export interface EditorInterface {
   printUrl: boolean;
+  darkMode: boolean;
   text: string;
 }
 
 const initialState = {
   printUrl: false,
+  darkMode: false,
   text: '',
 };
 
@@ -41,20 +44,24 @@ export default class Editor extends React.Component<{}, EditorInterface> {
     const delegate: EditorKitDelegate = {
       /** This loads every time a different note is loaded */
       setEditorRawText: (text: string) => {
+        const bg_color_code: string = window.getComputedStyle(document.documentElement).getPropertyValue('--sn-stylekit-background-color');
+        var darkMode: boolean = false;
+        if (bg_color_code.replace(/\s/g, '').length) {
+          darkMode = tinycolor(bg_color_code).isDark();
+        }
         this.setState({
           ...initialState,
+          darkMode,
           text,
         });
       },
-      clearUndoHistory: () => {},
+      clearUndoHistory: () => { },
       getElementsBySelector: () => [],
       generateCustomPreview: text => {
-        
-          return {
-            html: `<div> </div>`,
-            plain: ` `,
-          };
-        
+        return {
+          html: `<div>_</div>`,
+          plain: `_`,
+        };
       },
     };
 
@@ -72,10 +79,6 @@ export default class Editor extends React.Component<{}, EditorInterface> {
   };
 
   saveNote = (text: string) => {
-    /**
-     * This will work in an SN context, but breaks the standalone editor,
-     * so we need to catch the error
-     */
     try {
       this.editorKit?.onEditorValueChanged(text);
     } catch (error) {
@@ -100,7 +103,7 @@ export default class Editor extends React.Component<{}, EditorInterface> {
   };
 
   render() {
-    const { text } = this.state;
+    const { text, darkMode } = this.state;
     var parsed_text: TDDocument | undefined = undefined;
     try {
       parsed_text = JSON.parse(text);
@@ -144,7 +147,7 @@ export default class Editor extends React.Component<{}, EditorInterface> {
             document={parsed_text}
             showPages={false}
             showMenu={false}
-            darkMode={false}
+            darkMode={darkMode}
             onPersist={this.onPictureChange}
           />
         </div>
