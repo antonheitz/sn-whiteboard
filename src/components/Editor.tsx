@@ -44,7 +44,9 @@ export default class Editor extends React.Component<{}, EditorInterface> {
     const delegate: EditorKitDelegate = {
       /** This loads every time a different note is loaded */
       setEditorRawText: (text: string) => {
-        const bg_color_code: string = window.getComputedStyle(document.documentElement).getPropertyValue('--sn-stylekit-background-color');
+        const bg_color_code: string = window
+          .getComputedStyle(document.documentElement)
+          .getPropertyValue('--sn-stylekit-background-color');
         var darkMode: boolean = false;
         if (bg_color_code.replace(/\s/g, '').length) {
           darkMode = tinycolor(bg_color_code).isDark();
@@ -55,9 +57,9 @@ export default class Editor extends React.Component<{}, EditorInterface> {
           text,
         });
       },
-      clearUndoHistory: () => { },
+      clearUndoHistory: () => {},
       getElementsBySelector: () => [],
-      generateCustomPreview: text => {
+      generateCustomPreview: (text) => {
         return {
           html: `<div>_</div>`,
           plain: `_`,
