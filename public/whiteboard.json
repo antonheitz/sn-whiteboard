@@ -3,7 +3,7 @@
   "name": "Whiteboard",
   "content_type": "SN|Component",
   "area": "editor-editor",
-  "version": "0.1.5.1",
+  "version": "0.1.6",
   "description": "An editor based on TLDraw to draw nice Pictures or take notes by hand.",
   "url": "https://antonheitz.github.io/sn-whiteboard/",
   "download_url": "https://github.com/antonheitz/sn-whiteboard",
