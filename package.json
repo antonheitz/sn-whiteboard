@@ -1,10 +1,11 @@
 {
-  "name": "standard-notes-editor-template-cra-typescript",
+  "name": "sn-whiteboard",
   "version": "0.1.6",
-  "description": "Template for building editors for Standard Notes using Create React App and TypeScript",
+  "description": "A whiteboard editor for Standard Notes",
   "keywords": [
     "Standard Notes",
-    "Standard Notes Extensions"
+    "Standard Notes Extensions",
+    "whiteboard"
   ],
   "private": true,
   "license": "AGPL-3.0-or-later",
