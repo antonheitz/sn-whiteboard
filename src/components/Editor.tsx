@@ -61,8 +61,8 @@ export default class Editor extends React.Component<{}, EditorInterface> {
       getElementsBySelector: () => [],
       generateCustomPreview: (text) => {
         return {
-          html: `<div>_</div>`,
-          plain: `_`,
+          html: `<div> </div>`,
+          plain: ` `,
         };
       },
     };
