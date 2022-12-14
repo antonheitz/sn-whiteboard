@@ -1,6 +1,6 @@
 {
   "name": "standard-notes-editor-template-cra-typescript",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Template for building editors for Standard Notes using Create React App and TypeScript",
   "keywords": [
     "Standard Notes",
