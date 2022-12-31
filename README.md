@@ -18,7 +18,7 @@ Also you can self-host the extension, a guide below.
 
 ```
 git clone git@github.com:antonheitz/sn-whiteboard.git
-cd sn-tldraw-editor
+cd sn-whiteboard
 ```
 
 2. Install the dependencies with `yarn install`.
